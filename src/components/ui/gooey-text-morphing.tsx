@@ -20,6 +20,22 @@ export function GooeyText({
 }: GooeyTextProps) {
   const text1Ref = React.useRef<HTMLSpanElement>(null);
   const text2Ref = React.useRef<HTMLSpanElement>(null);
+  const [isDark, setIsDark] = React.useState(true);
+
+  React.useEffect(() => {
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   React.useEffect(() => {
     let textIndex = texts.length - 1;
@@ -117,7 +133,7 @@ export function GooeyText({
           ref={text1Ref}
           className={cn(
             "absolute inline-block select-none text-center text-5xl sm:text-6xl md:text-7xl",
-            "text-white",
+            isDark ? "text-white" : "text-black",
             textClassName
           )}
         />
@@ -125,7 +141,7 @@ export function GooeyText({
           ref={text2Ref}
           className={cn(
             "absolute inline-block select-none text-center text-5xl sm:text-6xl md:text-7xl",
-            "text-white",
+            isDark ? "text-white" : "text-black",
             textClassName
           )}
         />

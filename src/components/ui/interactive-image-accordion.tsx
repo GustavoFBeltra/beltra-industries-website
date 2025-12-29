@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const accordionItems = [
@@ -9,35 +9,35 @@ const accordionItems = [
     title: 'TAB Point of Sales',
     description: 'High-performance POS for hospitality and retail',
     imageUrl: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop',
-    href: '/platforms#tab',
+    href: '/platforms/tab',
   },
   {
     id: 2,
     title: 'Yapr',
     description: 'AI-powered language companion',
     imageUrl: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2071&auto=format&fit=crop',
-    href: '/platforms#yapr',
+    href: '/platforms/yapr',
   },
   {
     id: 3,
     title: 'Probono AI',
     description: 'On-demand legal assistance platform',
     imageUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop',
-    href: '/platforms#probono',
+    href: '/platforms/probono',
   },
   {
     id: 4,
     title: 'Third Eye Security',
     description: 'Computer vision-powered security',
     imageUrl: 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2070&auto=format&fit=crop',
-    href: '/platforms#thirdeye',
+    href: '/platforms/thirdeye',
   },
   {
     id: 5,
     title: 'Growth-ly',
     description: 'Intelligent CRM for modern businesses',
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
-    href: '/platforms#growthly',
+    href: '/platforms/growthly',
     comingSoon: true,
   },
 ];
@@ -137,6 +137,22 @@ const AccordionItem = ({ item, isActive, onMouseEnter }: AccordionItemProps) => 
 
 export function PlatformAccordion() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleItemHover = (index: number) => {
     setActiveIndex(index);
@@ -149,14 +165,20 @@ export function PlatformAccordion() {
 
           {/* Left Side: Text Content */}
           <div className="w-full lg:w-2/5 text-center lg:text-left">
-            <span className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 border border-zinc-700/50 rounded-full px-3 py-1 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
+            <span className={`inline-flex items-center gap-2 text-xs font-mono rounded-full px-3 py-1 mb-6 border ${
+              isDark ? "text-zinc-400 border-zinc-700" : "text-zinc-800 border-black"
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${isDark ? "bg-white" : "bg-zinc-900"}`} />
               Our Platforms
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+            <h2 className={`text-4xl md:text-5xl font-bold leading-tight tracking-tight ${
+              isDark ? "text-white" : "text-black"
+            }`}>
               Intelligent Systems for Every Industry
             </h2>
-            <p className="mt-6 text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0">
+            <p className={`mt-6 text-lg max-w-xl mx-auto lg:mx-0 ${
+              isDark ? "text-zinc-400" : "text-zinc-800"
+            }`}>
               Five platforms powered by applied AI, solving real problems in commerce, language, legal access, security, and growth.
             </p>
             <div className="mt-8">

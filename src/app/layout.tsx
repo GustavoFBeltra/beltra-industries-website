@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen flex flex-col text-white dark:text-white light:text-zinc-900 antialiased transition-colors duration-300">
+      <body className="min-h-screen flex flex-col antialiased transition-colors duration-300">
         <FixedBackground />
         <div className="relative z-50">
           <Header />

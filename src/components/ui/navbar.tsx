@@ -32,7 +32,7 @@ const NavBar = ({ list, isDark = true }: NavBarProps) => {
                     relative flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all
                     ${isDark
                       ? "text-zinc-400 hover:text-white hover:bg-white/5"
-                      : "text-zinc-600 hover:text-black hover:bg-black/5"
+                      : "text-black hover:text-black hover:bg-black/5"
                     }
                     ${hovered === item?.id
                       ? isDark ? "text-white bg-white/5" : "text-black bg-black/5"
@@ -88,7 +88,7 @@ const NavBar = ({ list, isDark = true }: NavBarProps) => {
                             className={`w-full px-3 py-2 rounded-lg text-sm transition-colors ${
                               isDark
                                 ? "text-zinc-400 hover:text-white hover:bg-white/10"
-                                : "text-zinc-600 hover:text-black hover:bg-black/5"
+                                : "text-black hover:text-black hover:bg-black/5"
                             }`}
                           >
                             {nav?.title}

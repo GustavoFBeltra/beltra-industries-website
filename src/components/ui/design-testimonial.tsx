@@ -30,7 +30,24 @@ const visionStatements = [
 
 export function VisionStatement() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isDark, setIsDark] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  // Check theme
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains("dark"))
+    }
+    checkTheme()
+
+    const observer = new MutationObserver(checkTheme)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   // Mouse position for magnetic effect
   const mouseX = useMotionValue(0)
@@ -69,7 +86,9 @@ export function VisionStatement() {
       <div ref={containerRef} className="relative w-full max-w-5xl px-4" onMouseMove={handleMouseMove}>
         {/* Oversized index number - positioned to bleed off left edge */}
         <motion.div
-          className="absolute -left-8 top-1/2 -translate-y-1/2 text-[28rem] font-bold text-white/[0.03] dark:text-white/[0.03] select-none pointer-events-none leading-none tracking-tighter hidden lg:block"
+          className={`absolute -left-8 top-1/2 -translate-y-1/2 text-[28rem] font-bold select-none pointer-events-none leading-none tracking-tighter hidden lg:block ${
+            isDark ? "text-white/[0.03]" : "text-black/[0.15]"
+          }`}
           style={{ x: numberX, y: numberY }}
         >
           <AnimatePresence mode="wait">
@@ -89,9 +108,13 @@ export function VisionStatement() {
         {/* Main content - asymmetric layout */}
         <div className="relative flex">
           {/* Left column - vertical text */}
-          <div className="hidden md:flex flex-col items-center justify-center pr-16 border-r border-zinc-700/50 dark:border-zinc-700/50">
+          <div className={`hidden md:flex flex-col items-center justify-center pr-16 border-r ${
+            isDark ? "border-zinc-700/50" : "border-zinc-400/50"
+          }`}>
             <motion.span
-              className="text-xs font-mono text-zinc-400 dark:text-zinc-500 tracking-widest uppercase"
+              className={`text-xs font-mono tracking-widest uppercase ${
+                isDark ? "text-zinc-400" : "text-zinc-800"
+              }`}
               style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -101,9 +124,9 @@ export function VisionStatement() {
             </motion.span>
 
             {/* Vertical progress line */}
-            <div className="relative h-32 w-px bg-zinc-700/50 dark:bg-zinc-700/50 mt-8">
+            <div className={`relative h-32 w-px mt-8 ${isDark ? "bg-zinc-700/50" : "bg-zinc-400/50"}`}>
               <motion.div
-                className="absolute top-0 left-0 w-full bg-white dark:bg-white origin-top"
+                className={`absolute top-0 left-0 w-full origin-top ${isDark ? "bg-white" : "bg-zinc-900"}`}
                 animate={{
                   height: `${((activeIndex + 1) / visionStatements.length) * 100}%`,
                 }}
@@ -124,8 +147,10 @@ export function VisionStatement() {
                 transition={{ duration: 0.4 }}
                 className="mb-8"
               >
-                <span className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 dark:text-zinc-500 border border-zinc-700/50 dark:border-zinc-700/50 rounded-full px-3 py-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                <span className={`inline-flex items-center gap-2 text-xs font-mono rounded-full px-3 py-1 ${
+                  isDark ? "text-zinc-400 border-zinc-700" : "text-zinc-800 border-black"
+                } border`}>
+                  <span className={`w-1.5 h-1.5 rounded-full ${isDark ? "bg-white" : "bg-zinc-900"}`} />
                   {current.principle}
                 </span>
               </motion.div>
@@ -136,7 +161,9 @@ export function VisionStatement() {
               <AnimatePresence mode="wait">
                 <motion.blockquote
                   key={activeIndex}
-                  className="text-3xl sm:text-4xl md:text-5xl font-light text-white dark:text-white leading-[1.15] tracking-tight"
+                  className={`text-3xl sm:text-4xl md:text-5xl font-light leading-[1.15] tracking-tight ${
+                    isDark ? "text-white" : "text-black"
+                  }`}
                   initial="hidden"
                   animate="visible"
                   exit="exit"
@@ -184,13 +211,13 @@ export function VisionStatement() {
                 >
                   {/* Animated line before description */}
                   <motion.div
-                    className="w-8 h-px bg-white dark:bg-white"
+                    className={`w-8 h-px ${isDark ? "bg-white" : "bg-zinc-900"}`}
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     style={{ originX: 0 }}
                   />
-                  <p className="text-base text-zinc-400 dark:text-zinc-400">{current.description}</p>
+                  <p className={`text-base ${isDark ? "text-zinc-400" : "text-zinc-800"}`}>{current.description}</p>
                 </motion.div>
               </AnimatePresence>
 
@@ -198,7 +225,11 @@ export function VisionStatement() {
               <div className="flex items-center gap-4">
                 <motion.button
                   onClick={goPrev}
-                  className="btn-icon group relative w-12 h-12 rounded-full border border-zinc-700/50 bg-white/5 backdrop-blur-sm flex items-center justify-center overflow-hidden hover:border-white/30 hover:bg-white/10"
+                  className={`btn-icon group relative w-12 h-12 rounded-full border backdrop-blur-sm flex items-center justify-center overflow-hidden ${
+                    isDark
+                      ? "border-zinc-700/50 bg-white/5 hover:border-white/30 hover:bg-white/10"
+                      : "border-zinc-400/50 bg-zinc-900/5 hover:border-zinc-500/50 hover:bg-zinc-900/10"
+                  }`}
                   whileTap={{ scale: 0.95 }}
                 >
                   <svg
@@ -206,7 +237,7 @@ export function VisionStatement() {
                     height="18"
                     viewBox="0 0 16 16"
                     fill="none"
-                    className="relative z-10 text-white transition-colors"
+                    className={`relative z-10 transition-colors ${isDark ? "text-white" : "text-zinc-900"}`}
                   >
                     <path
                       d="M10 12L6 8L10 4"
@@ -220,7 +251,11 @@ export function VisionStatement() {
 
                 <motion.button
                   onClick={goNext}
-                  className="btn-icon group relative w-12 h-12 rounded-full border border-zinc-700/50 bg-white/5 backdrop-blur-sm flex items-center justify-center overflow-hidden hover:border-white/30 hover:bg-white/10"
+                  className={`btn-icon group relative w-12 h-12 rounded-full border backdrop-blur-sm flex items-center justify-center overflow-hidden ${
+                    isDark
+                      ? "border-zinc-700/50 bg-white/5 hover:border-white/30 hover:bg-white/10"
+                      : "border-zinc-400/50 bg-zinc-900/5 hover:border-zinc-500/50 hover:bg-zinc-900/10"
+                  }`}
                   whileTap={{ scale: 0.95 }}
                 >
                   <svg
@@ -228,7 +263,7 @@ export function VisionStatement() {
                     height="18"
                     viewBox="0 0 16 16"
                     fill="none"
-                    className="relative z-10 text-white transition-colors"
+                    className={`relative z-10 transition-colors ${isDark ? "text-white" : "text-zinc-900"}`}
                   >
                     <path
                       d="M6 4L10 8L6 12"
@@ -245,9 +280,9 @@ export function VisionStatement() {
         </div>
 
         {/* Bottom ticker - subtle repeating principles */}
-        <div className="absolute -bottom-20 left-0 right-0 overflow-hidden opacity-[0.08] pointer-events-none hidden lg:block">
+        <div className={`absolute -bottom-20 left-0 right-0 overflow-hidden pointer-events-none hidden lg:block ${isDark ? "opacity-[0.08]" : "opacity-[0.15]"}`}>
           <motion.div
-            className="flex whitespace-nowrap text-6xl font-bold tracking-tight text-white"
+            className={`flex whitespace-nowrap text-6xl font-bold tracking-tight ${isDark ? "text-white" : "text-black"}`}
             animate={{ x: [0, -1000] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >

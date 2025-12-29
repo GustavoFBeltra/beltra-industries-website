@@ -57,7 +57,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className={`text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight max-w-4xl ${
-              isDark ? "text-white" : "text-zinc-900"
+              isDark ? "text-white" : "text-black"
             }`}
           >
             Building intelligent systems for{" "}
@@ -74,7 +74,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             className={`mt-6 text-lg sm:text-xl max-w-2xl leading-relaxed ${
-              isDark ? "text-zinc-400" : "text-zinc-600"
+              isDark ? "text-zinc-400" : "text-zinc-800"
             }`}
           >
             Applied AI and software platforms spanning commerce, language, legal

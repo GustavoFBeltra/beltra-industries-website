@@ -57,12 +57,12 @@ function Footerdemo() {
               <Image
                 src={isDarkMode ? "/images/logo-light.png" : "/images/logo-dark.png"}
                 alt="Beltra Industries"
-                width={140}
-                height={56}
-                className="h-12 w-auto mb-4"
+                width={180}
+                height={72}
+                className="h-16 w-auto mb-4"
               />
             </Link>
-            <p className={`mb-6 text-sm leading-relaxed ${isDarkMode ? "text-zinc-400" : "text-zinc-600"}`}>
+            <p className={`mb-6 text-sm leading-relaxed ${isDarkMode ? "text-zinc-400" : "text-zinc-800"}`}>
               Building intelligent systems for real-world operations through applied AI and thoughtful engineering.
             </p>
             <form>
@@ -90,19 +90,19 @@ function Footerdemo() {
           <div>
             <h3 className="mb-4 text-lg font-semibold">Platforms</h3>
             <nav className="space-y-2 text-sm">
-              <Link href="/platforms#tab" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/platforms/tab" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 TAB Point of Sales
               </Link>
-              <Link href="/platforms#yapr" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/platforms/yapr" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Yapr
               </Link>
-              <Link href="/platforms#probono" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/platforms/probono" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Probono AI
               </Link>
-              <Link href="/platforms#thirdeye" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/platforms/thirdeye" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Third Eye Security
               </Link>
-              <Link href="/platforms#growthly" className={`inline-flex items-center gap-2 transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/platforms/growthly" className={`inline-flex items-center gap-2 transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Growth-ly
                 <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isDarkMode ? "bg-zinc-800 text-zinc-500" : "bg-zinc-200 text-zinc-500"}`}>Soon</span>
               </Link>
@@ -111,19 +111,19 @@ function Footerdemo() {
           <div>
             <h3 className="mb-4 text-lg font-semibold">Company</h3>
             <nav className="space-y-2 text-sm">
-              <Link href="/about" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/about" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 About
               </Link>
-              <Link href="/technology" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/technology" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Technology
               </Link>
-              <Link href="/industries" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/industries" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Industries
               </Link>
-              <Link href="/trust" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/trust" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Trust & Compliance
               </Link>
-              <Link href="/contact" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+              <Link href="/contact" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
                 Contact
               </Link>
             </nav>
@@ -158,17 +158,17 @@ function Footerdemo() {
                 </Tooltip>
               </TooltipProvider>
             </div>
-            <address className={`space-y-2 text-sm not-italic mb-4 ${isDarkMode ? "text-zinc-400" : "text-zinc-600"}`}>
+            <address className={`space-y-2 text-sm not-italic mb-4 ${isDarkMode ? "text-zinc-400" : "text-zinc-800"}`}>
               <p>contact@beltraindustries.com</p>
             </address>
             <div className="flex items-center space-x-2">
-              <Sun className={`h-4 w-4 ${isDarkMode ? "text-zinc-400" : "text-zinc-600"}`} />
+              <Sun className={`h-4 w-4 ${isDarkMode ? "text-zinc-400" : "text-zinc-800"}`} />
               <Switch
                 id="dark-mode"
                 checked={isDarkMode}
                 onCheckedChange={setIsDarkMode}
               />
-              <Moon className={`h-4 w-4 ${isDarkMode ? "text-zinc-400" : "text-zinc-600"}`} />
+              <Moon className={`h-4 w-4 ${isDarkMode ? "text-zinc-400" : "text-zinc-800"}`} />
               <Label htmlFor="dark-mode" className="sr-only">
                 Toggle dark mode
               </Label>
@@ -176,14 +176,14 @@ function Footerdemo() {
           </div>
         </div>
         <div className={`mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 text-center md:flex-row ${isDarkMode ? "border-zinc-800" : "border-zinc-300"}`}>
-          <p className={`text-sm ${isDarkMode ? "text-zinc-500" : "text-zinc-500"}`}>
+          <p className={`text-sm ${isDarkMode ? "text-zinc-500" : "text-zinc-800"}`}>
             &copy; {new Date().getFullYear()} Beltra Industries LLC. All rights reserved.
           </p>
           <nav className="flex gap-4 text-sm">
-            <Link href="#" className={`transition-colors ${isDarkMode ? "text-zinc-500 hover:text-white" : "text-zinc-500 hover:text-black"}`}>
+            <Link href="#" className={`transition-colors ${isDarkMode ? "text-zinc-500 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
               Privacy Policy
             </Link>
-            <Link href="#" className={`transition-colors ${isDarkMode ? "text-zinc-500 hover:text-white" : "text-zinc-500 hover:text-black"}`}>
+            <Link href="#" className={`transition-colors ${isDarkMode ? "text-zinc-500 hover:text-white" : "text-zinc-800 hover:text-black"}`}>
               Terms of Service
             </Link>
           </nav>
