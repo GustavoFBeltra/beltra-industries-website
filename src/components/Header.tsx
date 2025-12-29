@@ -3,8 +3,30 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import NavBar, { NavItem } from "@/components/ui/navbar";
 
-const navigation = [
+const navigation: NavItem[] = [
+  { id: 1, title: "Home", url: "/" },
+  {
+    id: 2,
+    title: "Platforms",
+    url: "/platforms",
+    dropdown: true,
+    items: [
+      { id: 21, title: "TAB Point of Sales", url: "/platforms#tab" },
+      { id: 22, title: "Yapr", url: "/platforms#yapr" },
+      { id: 23, title: "Probono AI", url: "/platforms#probono" },
+      { id: 24, title: "Third Eye Security", url: "/platforms#thirdeye" },
+      { id: 25, title: "Growth-ly", url: "/platforms#growthly" },
+    ],
+  },
+  { id: 3, title: "Technology", url: "/technology" },
+  { id: 4, title: "Industries", url: "/industries" },
+  { id: 5, title: "About", url: "/about" },
+  { id: 6, title: "Trust", url: "/trust" },
+];
+
+const mobileNavigation = [
   { name: "Home", href: "/" },
   { name: "Platforms", href: "/platforms" },
   { name: "Technology", href: "/technology" },
@@ -89,20 +111,8 @@ export default function Header() {
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  isDark
-                    ? "text-zinc-400 hover:text-white"
-                    : "text-zinc-600 hover:text-black"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <div className="hidden lg:block">
+            <NavBar list={navigation} isDark={isDark} />
           </div>
 
           {/* CTA Button */}
@@ -144,7 +154,7 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className={`lg:hidden py-4 border-t ${isDark ? "border-zinc-800" : "border-zinc-300"}`}>
             <div className="flex flex-col gap-2">
-              {navigation.map((item) => (
+              {mobileNavigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
