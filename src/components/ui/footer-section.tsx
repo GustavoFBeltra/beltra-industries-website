@@ -78,11 +78,7 @@ function Footerdemo() {
               <Button
                 type="submit"
                 size="icon"
-                className={`absolute right-1 top-1 h-8 w-8 rounded-full transition-transform hover:scale-105 ${
-                  isDarkMode
-                    ? "bg-white text-black hover:bg-zinc-200"
-                    : "bg-black text-white hover:bg-zinc-800"
-                }`}
+                className="btn-primary absolute right-1 top-1 h-8 w-8 rounded-full"
               >
                 <Send className="h-4 w-4" />
                 <span className="sr-only">Subscribe</span>
@@ -104,6 +100,10 @@ function Footerdemo() {
               </Link>
               <Link href="/platforms#thirdeye" className={`block transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
                 Third Eye Security
+              </Link>
+              <Link href="/platforms#growthly" className={`inline-flex items-center gap-2 transition-colors ${isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"}`}>
+                Growth-ly
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isDarkMode ? "bg-zinc-800 text-zinc-500" : "bg-zinc-200 text-zinc-500"}`}>Soon</span>
               </Link>
             </nav>
           </div>
@@ -133,7 +133,7 @@ function Footerdemo() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="icon" className={`rounded-full bg-transparent ${isDarkMode ? "border-zinc-700 hover:bg-zinc-800 hover:text-white" : "border-zinc-300 hover:bg-zinc-200 hover:text-black"}`}>
+                    <Button variant="outline" size="icon" className={`btn-icon rounded-full bg-transparent ${isDarkMode ? "border-zinc-700 hover:bg-zinc-800 hover:text-white" : "border-zinc-300 hover:bg-zinc-200 hover:text-black"}`}>
                       <Twitter className="h-4 w-4" />
                       <span className="sr-only">Twitter</span>
                     </Button>
@@ -146,7 +146,7 @@ function Footerdemo() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="icon" className={`rounded-full bg-transparent ${isDarkMode ? "border-zinc-700 hover:bg-zinc-800 hover:text-white" : "border-zinc-300 hover:bg-zinc-200 hover:text-black"}`}>
+                    <Button variant="outline" size="icon" className={`btn-icon rounded-full bg-transparent ${isDarkMode ? "border-zinc-700 hover:bg-zinc-800 hover:text-white" : "border-zinc-300 hover:bg-zinc-200 hover:text-black"}`}>
                       <Linkedin className="h-4 w-4" />
                       <span className="sr-only">LinkedIn</span>
                     </Button>

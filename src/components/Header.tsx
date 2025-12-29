@@ -109,11 +109,7 @@ export default function Header() {
           <div className="hidden lg:block">
             <Link
               href="/contact"
-              className={`inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                isDark
-                  ? "text-black bg-white hover:bg-zinc-200"
-                  : "text-white bg-black hover:bg-zinc-800"
-              }`}
+              className="btn-primary inline-flex items-center justify-center px-5 py-2.5 text-sm rounded-lg"
             >
               Get in Touch
             </Link>
@@ -164,11 +160,7 @@ export default function Header() {
               ))}
               <Link
                 href="/contact"
-                className={`block px-4 py-3 mt-2 text-base font-semibold text-center rounded-lg transition-colors ${
-                  isDark
-                    ? "text-black bg-white hover:bg-zinc-200"
-                    : "text-white bg-black hover:bg-zinc-800"
-                }`}
+                className="btn-primary block px-4 py-3 mt-2 text-base text-center rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Get in Touch

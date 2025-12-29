@@ -1,53 +1,8 @@
 import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
-
-const platforms = [
-  {
-    name: "TAB Point of Sales",
-    description:
-      "High-performance point-of-sale and operations platform for hospitality and retail.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-      </svg>
-    ),
-    href: "/platforms#tab",
-  },
-  {
-    name: "Yapr",
-    description:
-      "AI-powered language companion for real-time communication, learning, and accessibility.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
-      </svg>
-    ),
-    href: "/platforms#yapr",
-  },
-  {
-    name: "Probono AI",
-    description:
-      "On-demand legal assistance platform expanding access to legal information and guidance.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
-      </svg>
-    ),
-    href: "/platforms#probono",
-  },
-  {
-    name: "Third Eye Security",
-    description:
-      "Computer vision–powered security and monitoring systems using edge and cloud intelligence.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-    href: "/platforms#thirdeye",
-  },
-];
+import { VisionStatement } from "@/components/ui/design-testimonial";
+import { PlatformAccordion } from "@/components/ui/interactive-image-accordion";
+import { GooeyText } from "@/components/ui/gooey-text-morphing";
 
 const principles = [
   {
@@ -88,14 +43,6 @@ const principles = [
   },
 ];
 
-const industries = [
-  { name: "Hospitality", icon: "🍽️" },
-  { name: "Retail", icon: "🛒" },
-  { name: "Legal", icon: "⚖️" },
-  { name: "Security", icon: "🔒" },
-  { name: "SMB", icon: "🏢" },
-  { name: "Enterprise", icon: "🏛️" },
-];
 
 export default function Home() {
   return (
@@ -103,60 +50,13 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Platform Overview */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Our Platforms
-            </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              Intelligent solutions designed for real-world deployment
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {platforms.map((platform) => (
-              <Link
-                key={platform.name}
-                href={platform.href}
-                className="group relative p-6 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:bg-zinc-900 hover:border-zinc-700 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 text-zinc-300 group-hover:bg-white/20 transition-colors">
-                    {platform.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-white group-hover:text-zinc-200 transition-colors">
-                      {platform.name}
-                    </h3>
-                    <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-                      {platform.description}
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <svg className="w-5 h-5 text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              href="/platforms"
-              className="inline-flex items-center gap-2 text-zinc-300 hover:text-white font-medium transition-colors"
-            >
-              View All Platforms
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
+      {/* Vision */}
+      <section className="py-24 bg-black/30 backdrop-blur-sm">
+        <VisionStatement />
       </section>
+
+      {/* Platform Accordion */}
+      <PlatformAccordion />
 
       {/* Principles */}
       <section className="py-24 bg-black/30 backdrop-blur-sm">
@@ -189,27 +89,24 @@ export default function Home() {
       </section>
 
       {/* Industries */}
-      <section className="py-24">
+      <section className="py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Industries Served
-            </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              Delivering intelligent solutions across diverse sectors
+          <div className="text-center">
+            <p className="text-lg sm:text-xl text-zinc-500 mb-4 tracking-wide">
+              Delivering intelligent solutions to
             </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
-            {industries.map((industry) => (
-              <div
-                key={industry.name}
-                className="flex items-center gap-3 px-5 py-3 bg-zinc-900/50 border border-zinc-800 rounded-full hover:border-zinc-700 transition-colors"
-              >
-                <span className="text-xl">{industry.icon}</span>
-                <span className="text-sm font-medium text-zinc-300">{industry.name}</span>
-              </div>
-            ))}
+            <div className="h-[100px] sm:h-[120px] flex items-center justify-center">
+              <GooeyText
+                texts={["Hospitality", "Retail", "Legal", "Security", "SMB", "Enterprise"]}
+                morphTime={1.5}
+                cooldownTime={2}
+                className="w-full"
+                textClassName="font-bold tracking-tight"
+              />
+            </div>
+            <p className="text-lg sm:text-xl text-zinc-500 mt-4 tracking-wide">
+              and beyond
+            </p>
           </div>
         </div>
       </section>
@@ -231,7 +128,7 @@ export default function Home() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-black bg-white rounded-xl hover:bg-zinc-200 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="btn-primary inline-flex items-center justify-center px-8 py-4 text-base rounded-xl"
               >
                 Contact Beltra Industries
                 <svg className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

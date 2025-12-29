@@ -90,11 +90,7 @@ export default function HeroSection() {
           >
             <Link
               href="/platforms"
-              className={`inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-xl transition-all duration-200 shadow-lg hover:-translate-y-0.5 ${
-                isDark
-                  ? "text-black bg-white hover:bg-zinc-200 shadow-white/20 hover:shadow-white/30"
-                  : "text-white bg-black hover:bg-zinc-800 shadow-black/20 hover:shadow-black/30"
-              }`}
+              className="btn-primary inline-flex items-center justify-center px-8 py-4 text-base rounded-xl"
             >
               Explore Our Platforms
               <svg className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,11 +99,7 @@ export default function HeroSection() {
             </Link>
             <Link
               href="/contact"
-              className={`inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-xl transition-all duration-200 backdrop-blur-sm hover:-translate-y-0.5 ${
-                isDark
-                  ? "text-zinc-300 bg-white/5 border border-zinc-700 hover:bg-white/10 hover:border-zinc-600"
-                  : "text-zinc-700 bg-black/5 border border-zinc-300 hover:bg-black/10 hover:border-zinc-400"
-              }`}
+              className="btn-secondary inline-flex items-center justify-center px-8 py-4 text-base rounded-xl"
             >
               Contact Us
             </Link>
