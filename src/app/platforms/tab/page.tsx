@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
+import { AppShowcase, defaultTabApps } from "@/components/ui/app-showcase";
 
 const features = [
   {
@@ -104,13 +106,16 @@ export default function TABPage() {
               </span>
             </div>
 
-            {/* Platform Icon */}
-            <div className={`mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-2xl ${
-              isDark ? "bg-white/10 text-white" : "bg-zinc-900/10 text-zinc-900"
-            }`}>
-              <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-              </svg>
+            {/* Platform Logo */}
+            <div className="flex justify-center mb-8">
+              <Image
+                src={isDark ? "/images/platforms/tab/logo/dark.png" : "/images/platforms/tab/logo/light.png"}
+                alt="TAB Point of Sales"
+                width={400}
+                height={160}
+                className="h-24 w-auto"
+                priority
+              />
             </div>
 
             <h1 className={`text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl ${
@@ -146,12 +151,27 @@ export default function TABPage() {
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* App Showcase */}
       <section className={`py-24 sm:py-32 ${isDark ? "bg-zinc-900/50" : "bg-zinc-100/50"}`}>
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center mb-12">
+            <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-black"}`}>
+              Complete Product Suite
+            </h2>
+            <p className={`mt-4 text-lg ${isDark ? "text-zinc-400" : "text-zinc-800"}`}>
+              Explore our integrated applications with light and dark mode support
+            </p>
+          </div>
+          <AppShowcase apps={defaultTabApps} />
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-black"}`}>
-              Key Features
+              Platform Features
             </h2>
             <p className={`mt-4 text-lg ${isDark ? "text-zinc-400" : "text-zinc-800"}`}>
               Everything you need to run your business efficiently
