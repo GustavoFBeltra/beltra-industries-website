@@ -94,7 +94,8 @@ function AppShowcase({ apps, className = "" }: AppShowcaseProps) {
 
               {/* Image Comparison */}
               <div className={`mx-auto ${app.isMobile ? "max-w-xs" : "max-w-4xl"}`}>
-                <div className="mb-4 flex justify-center gap-4 text-sm">
+                {/* Legend - hidden on mobile since toggle button shows mode */}
+                <div className="mb-4 hidden md:flex justify-center gap-4 text-sm">
                   <span
                     className={`flex items-center gap-2 ${
                       isDark ? "text-zinc-400" : "text-zinc-600"

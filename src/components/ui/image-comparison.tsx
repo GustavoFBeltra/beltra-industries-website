@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { GripVertical } from "lucide-react";
+import { GripVertical, Sun, Moon } from "lucide-react";
 
 interface ImageComparisonProps {
   beforeImage: string;
@@ -24,31 +24,73 @@ function ImageComparison({
   const aspectClass = isMobile ? "aspect-[9/19.5]" : "aspect-video";
   const [inset, setInset] = useState<number>(50);
   const [onMouseDown, setOnMouseDown] = useState<boolean>(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [showDarkMode, setShowDarkMode] = useState(true);
 
-  const onMouseMove = (e: React.MouseEvent | React.TouchEvent) => {
+  // Detect small screens for simplified mobile UI
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  const onMouseMove = (e: React.MouseEvent) => {
     if (!onMouseDown) return;
-
     const rect = e.currentTarget.getBoundingClientRect();
-    let x = 0;
-
-    if ("touches" in e && e.touches.length > 0) {
-      x = e.touches[0].clientX - rect.left;
-    } else if ("clientX" in e) {
-      x = e.clientX - rect.left;
-    }
-
+    const x = e.clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setInset(percentage);
   };
 
+  // Simplified toggle UI for mobile devices
+  if (isSmallScreen) {
+    return (
+      <div className={`relative ${className}`}>
+        {/* Toggle Button */}
+        <div className="flex justify-center mb-4">
+          <button
+            onClick={() => setShowDarkMode(!showDarkMode)}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800 text-white text-sm font-medium transition-all hover:bg-zinc-700"
+          >
+            {showDarkMode ? (
+              <>
+                <Moon className="w-4 h-4" />
+                Dark Mode
+              </>
+            ) : (
+              <>
+                <Sun className="w-4 h-4" />
+                Light Mode
+              </>
+            )}
+            <span className="text-zinc-400 ml-1">• Tap to switch</span>
+          </button>
+        </div>
+
+        {/* Single Image Display */}
+        <div className={`relative ${aspectClass} w-full overflow-hidden rounded-2xl`}>
+          <Image
+            src={showDarkMode ? beforeImage : afterImage}
+            alt={showDarkMode ? beforeAlt : afterAlt}
+            width={isMobile ? 390 : 1920}
+            height={isMobile ? 844 : 1080}
+            className={`w-full h-full ${aspectClass} rounded-2xl border border-zinc-700 object-cover`}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Full slider UI for desktop
   return (
     <div
       className={`relative ${aspectClass} w-full h-full overflow-hidden rounded-2xl select-none ${className}`}
       onMouseMove={onMouseMove}
       onMouseUp={() => setOnMouseDown(false)}
       onMouseLeave={() => setOnMouseDown(false)}
-      onTouchMove={onMouseMove}
-      onTouchEnd={() => setOnMouseDown(false)}
     >
       {/* Slider handle */}
       <div
@@ -59,15 +101,15 @@ function ImageComparison({
       >
         <button
           className="bg-white rounded-lg hover:scale-110 transition-all w-6 h-12 select-none -translate-y-1/2 absolute top-1/2 -ml-3 z-30 cursor-ew-resize flex justify-center items-center shadow-lg"
-          onTouchStart={(e) => {
-            setOnMouseDown(true);
-            onMouseMove(e);
-          }}
           onMouseDown={(e) => {
             setOnMouseDown(true);
-            onMouseMove(e);
+            const rect = e.currentTarget.parentElement?.parentElement?.getBoundingClientRect();
+            if (rect) {
+              const x = e.clientX - rect.left;
+              const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+              setInset(percentage);
+            }
           }}
-          onTouchEnd={() => setOnMouseDown(false)}
           onMouseUp={() => setOnMouseDown(false)}
         >
           <GripVertical className="h-4 w-4 text-zinc-600 select-none" />
