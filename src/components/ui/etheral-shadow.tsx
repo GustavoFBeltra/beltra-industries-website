@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useId, useEffect, CSSProperties, ReactNode } from 'react';
+import React, { useRef, useId, useEffect, useState, CSSProperties, ReactNode } from 'react';
 import { animate, useMotionValue, AnimationPlaybackControls } from 'framer-motion';
 
 // Type definitions
@@ -56,10 +56,23 @@ export function Component({
     children
 }: ShadowOverlayProps) {
     const id = useInstanceId();
-    const animationEnabled = animation && animation.scale > 0;
+    const [isMobile, setIsMobile] = useState(false);
     const feColorMatrixRef = useRef<SVGFEColorMatrixElement>(null);
     const hueRotateMotionValue = useMotionValue(180);
     const hueRotateAnimation = useRef<AnimationPlaybackControls | null>(null);
+
+    // Detect mobile for performance optimization
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Disable expensive SVG animations on mobile
+    const animationEnabled = animation && animation.scale > 0 && !isMobile;
 
     const displacementScale = animation ? mapRange(animation.scale, 1, 100, 20, 100) : 0;
     const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
@@ -92,6 +105,50 @@ export function Component({
         }
     }, [animationEnabled, animationDuration, hueRotateMotionValue]);
 
+    // Simplified static version for mobile
+    if (isMobile) {
+        return (
+            <div
+                className={className}
+                style={{
+                    overflow: "hidden",
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    ...style
+                }}
+            >
+                {/* Simple radial gradient for mobile - no SVG filters */}
+                <div
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: `radial-gradient(ellipse at center, ${color} 0%, transparent 70%)`,
+                        opacity: 0.6,
+                    }}
+                />
+
+                {/* Content overlay */}
+                {children && (
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            textAlign: "center",
+                            zIndex: 10,
+                            width: "100%"
+                        }}
+                    >
+                        {children}
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    // Full animated version for desktop
     return (
         <div
             className={className}
@@ -117,7 +174,7 @@ export function Component({
                                 <feTurbulence
                                     result="undulation"
                                     numOctaves="2"
-                                    baseFrequency={`${mapRange(animation.scale, 0, 100, 0.001, 0.0005)},${mapRange(animation.scale, 0, 100, 0.004, 0.002)}`}
+                                    baseFrequency={`${mapRange(animation!.scale, 0, 100, 0.001, 0.0005)},${mapRange(animation!.scale, 0, 100, 0.004, 0.002)}`}
                                     seed="0"
                                     type="turbulence"
                                 />

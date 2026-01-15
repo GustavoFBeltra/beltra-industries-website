@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function HeroSection() {
   const [isDark, setIsDark] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkTheme = () => {
@@ -23,22 +24,37 @@ export default function HeroSection() {
     return () => observer.disconnect();
   }, []);
 
+  // Detect mobile for performance optimization
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Simplified animations for mobile
+  const mobileAnimation = { opacity: 1, y: 0, scale: 1 };
+  const desktopInitial = { opacity: 0, y: 20 };
+  const desktopAnimate = { opacity: 1, y: 0 };
+
   return (
     <section className="relative w-full h-screen">
       {/* Content */}
       <div className="relative z-10 w-full h-full flex items-center justify-center">
         <div className="w-full max-w-7xl mx-auto px-6 py-20 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={isMobile ? mobileAnimation : desktopInitial}
+          animate={isMobile ? mobileAnimation : desktopAnimate}
+          transition={isMobile ? { duration: 0 } : { duration: 0.8 }}
           className="flex flex-col items-center text-center"
         >
           {/* Logo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={isMobile ? mobileAnimation : { opacity: 0, scale: 0.9 }}
+            animate={isMobile ? mobileAnimation : { opacity: 1, scale: 1 }}
+            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
             className="mb-8 mt-16 sm:mt-20 lg:mt-24"
           >
             <Image
@@ -46,16 +62,16 @@ export default function HeroSection() {
               alt="Beltra Industries"
               width={800}
               height={320}
-              className="h-80 sm:h-96 lg:h-[28rem] w-auto drop-shadow-2xl"
+              className={`h-80 sm:h-96 lg:h-[28rem] w-auto ${isMobile ? "" : "drop-shadow-2xl"}`}
               priority
             />
           </motion.div>
 
           {/* Tagline */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={isMobile ? mobileAnimation : desktopInitial}
+            animate={isMobile ? mobileAnimation : desktopAnimate}
+            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
             className={`text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight max-w-4xl ${
               isDark ? "text-white" : "text-black"
             }`}
@@ -70,9 +86,9 @@ export default function HeroSection() {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            initial={isMobile ? mobileAnimation : desktopInitial}
+            animate={isMobile ? mobileAnimation : desktopAnimate}
+            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
             className={`mt-6 text-lg sm:text-xl max-w-2xl leading-relaxed ${
               isDark ? "text-zinc-400" : "text-zinc-800"
             }`}
@@ -83,9 +99,9 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
+            initial={isMobile ? mobileAnimation : desktopInitial}
+            animate={isMobile ? mobileAnimation : desktopAnimate}
+            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
             className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link
