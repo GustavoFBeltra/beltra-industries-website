@@ -93,7 +93,7 @@ export default function ScrollExpand() {
             ref={video}
             className="absolute inset-0 h-full w-full object-cover"
             src="/videos/foundry-loop.mp4"
-            poster="/images/foundry.png"
+            poster="/images/foundry-poster.webp"
             muted
             loop
             playsInline

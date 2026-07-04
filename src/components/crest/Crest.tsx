@@ -33,17 +33,27 @@ export default function Crest({ className = "" }: { className?: string }) {
     const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", onChange);
 
+    // Mount the 3D scene only after the page has fully loaded AND the main
+    // thread is idle, so three.js never competes with LCP / initial paint.
+    let idle: number | undefined;
     const hasIdle = typeof window.requestIdleCallback === "function";
-    const idle = hasIdle
-      ? window.requestIdleCallback(() => setMounted(true), { timeout: 1200 })
-      : window.setTimeout(() => setMounted(true), 350);
+    const mount = () => {
+      idle = hasIdle
+        ? window.requestIdleCallback(() => setMounted(true), { timeout: 3000 })
+        : window.setTimeout(() => setMounted(true), 600);
+    };
+    if (document.readyState === "complete") {
+      mount();
+    } else {
+      window.addEventListener("load", mount, { once: true });
+    }
 
     return () => {
       mq.removeEventListener("change", onChange);
-      if (hasIdle) {
-        window.cancelIdleCallback(idle);
-      } else {
-        window.clearTimeout(idle);
+      window.removeEventListener("load", mount);
+      if (idle !== undefined) {
+        if (hasIdle) window.cancelIdleCallback(idle);
+        else window.clearTimeout(idle);
       }
     };
   }, []);
