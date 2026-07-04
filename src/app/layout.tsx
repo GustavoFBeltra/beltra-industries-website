@@ -1,13 +1,33 @@
 import type { Metadata } from "next";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FixedBackground from "@/components/FixedBackground";
+import TechBackground from "@/components/TechBackground";
+import CommandPalette from "@/components/CommandPalette";
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Beltra Industries LLC | Applied AI & Intelligent Systems",
+  metadataBase: new URL("https://beltraindustries.com"),
+  title: {
+    default: "Beltra Industries LLC — Applied AI & Intelligent Systems",
+    template: "%s — Beltra Industries",
+  },
   description:
-    "Beltra Industries develops applied AI and software platforms spanning commerce, language, legal access, and security.",
+    "Beltra Industries builds applied AI and software platforms spanning commerce, language, legal access, and security. Engineered for production, not demos.",
   keywords: [
     "AI",
     "artificial intelligence",
@@ -17,6 +37,30 @@ export const metadata: Metadata = {
     "legal tech",
     "security systems",
   ],
+  openGraph: {
+    title: "Beltra Industries LLC",
+    description:
+      "Applied AI and software platforms spanning commerce, language, legal access, and security.",
+    url: "https://beltraindustries.com",
+    siteName: "Beltra Industries",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/og.png",
+        width: 2400,
+        height: 1260,
+        alt: "Beltra Industries — Applied AI & Intelligent Systems",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beltra Industries LLC",
+    description:
+      "Applied AI and software platforms spanning commerce, language, legal access, and security.",
+    images: ["/og.png"],
+  },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -33,16 +77,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className="min-h-screen flex flex-col antialiased transition-colors duration-300">
-        <FixedBackground />
-        <div className="relative z-50">
-          <Header />
-        </div>
-        <main className="flex-1 relative z-10">{children}</main>
-        <div className="relative z-10">
-          <Footer />
-        </div>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          // Set the theme class before first paint to avoid a flash
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Beltra Industries LLC",
+              url: "https://beltraindustries.com",
+              logo: "https://beltraindustries.com/images/crest-black.png",
+              email: "contact@beltraindustries.com",
+              description:
+                "Beltra Industries builds applied AI and software platforms spanning commerce, language, legal access, and security.",
+              foundingLocation: { "@type": "Country", name: "United States" },
+              founder: { "@type": "Person", name: "Gustavo Beltra" },
+            }),
+          }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col font-sans">
+        <TechBackground />
+        <CommandPalette />
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );
