@@ -1,6 +1,8 @@
 import Link from "next/link";
 import CatalogList from "@/components/CatalogList";
+import CountUp from "@/components/CountUp";
 import Crest from "@/components/crest/Crest";
+import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import Scramble from "@/components/Scramble";
 import ScrollExpand from "@/components/ScrollExpand";
@@ -48,7 +50,7 @@ export default function Home() {
       {/* ————— Hero ————— */}
       <section className="relative overflow-hidden">
         <div className="mx-auto grid min-h-svh max-w-7xl grid-cols-1 items-center gap-6 px-5 pb-16 pt-28 sm:px-8 lg:grid-cols-12 lg:pt-20">
-          <div className="relative z-10 lg:col-span-7">
+          <Parallax speed={0.06} fade className="relative z-10 lg:col-span-7">
             <p className="tech-label hero-rise text-graphite">
               <Scramble text="Beltra Industries LLC — Applied AI" duration={700} />
             </p>
@@ -87,17 +89,17 @@ export default function Home() {
                 Contact Us
               </Link>
             </div>
-          </div>
+          </Parallax>
 
           {/* The machined crest — drag to rotate */}
-          <div className="relative lg:col-span-5">
+          <Parallax speed={0.16} className="relative lg:col-span-5">
             <div className="relative mx-auto aspect-square w-full max-w-[300px] sm:max-w-[420px] lg:max-w-none">
               <Crest className="absolute inset-0" />
             </div>
             <p className="tech-label mt-2 text-center text-steel">
               Drag to rotate
             </p>
-          </div>
+          </Parallax>
         </div>
 
         {/* Sector ticker */}
@@ -117,6 +119,32 @@ export default function Home() {
 
       {/* ————— Immersive product zoom ————— */}
       <ScrollExpand />
+
+      {/* ————— Tolerances ————— */}
+      <section className="py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="grid grid-cols-2 gap-px border border-fog bg-fog lg:grid-cols-4">
+            {[
+              { end: 5, pad: 2, suffix: "", label: "Platforms in the catalog" },
+              { end: 6, pad: 2, suffix: "", label: "Sectors served" },
+              { end: 100, pad: 0, suffix: "+", label: "Languages supported" },
+              { end: 1, pad: 0, prefix: "<", suffix: "s", label: "Transaction processing" },
+            ].map((s, i) => (
+              <Reveal key={s.label} delay={i * 70} className="bg-paper p-8 sm:p-10">
+                <p className="display text-5xl tabular-nums sm:text-6xl">
+                  <CountUp
+                    end={s.end}
+                    pad={s.pad}
+                    prefix={s.prefix}
+                    suffix={s.suffix}
+                  />
+                </p>
+                <p className="tech-label mt-4 text-graphite">{s.label}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ————— Operating principles ————— */}
       <section className="dark-section bg-ink py-24 text-paper sm:py-32">

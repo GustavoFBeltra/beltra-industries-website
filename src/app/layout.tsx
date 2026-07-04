@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TechBackground from "@/components/TechBackground";
 import CommandPalette from "@/components/CommandPalette";
+import ScrollRail from "@/components/ScrollRail";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -110,6 +111,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col font-sans">
         <TechBackground />
         <CommandPalette />
+        <ScrollRail />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

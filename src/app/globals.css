@@ -133,6 +133,22 @@ body {
   border-right: 1px solid currentColor;
 }
 
+/* Corner ticks draw themselves in when the plate reveals */
+.reveal.reg-plate::before,
+.reveal.reg-plate::after {
+  width: 0;
+  height: 0;
+  transition:
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s,
+    height 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s;
+}
+
+.reveal.is-visible.reg-plate::before,
+.reveal.is-visible.reg-plate::after {
+  width: 14px;
+  height: 14px;
+}
+
 /* Ambient blueprint grid */
 .tech-grid,
 .grid-spotlight {

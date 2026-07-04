@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import Parallax from "@/components/Parallax";
 import { platforms } from "@/lib/platforms";
 
 const company = [
@@ -77,11 +78,13 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Wordmark echo */}
+      {/* Wordmark echo — rises as the footer scrolls in */}
       <div className="overflow-hidden border-t border-hairline-dark" aria-hidden="true">
-        <p className="display-wide select-none whitespace-nowrap text-center text-[17vw] leading-none text-paper/[0.06]">
-          BELTRA
-        </p>
+        <Parallax speed={0.28}>
+          <p className="display-wide select-none whitespace-nowrap text-center text-[17vw] leading-none text-paper/[0.06]">
+            BELTRA
+          </p>
+        </Parallax>
       </div>
 
       <div className="border-t border-hairline-dark">

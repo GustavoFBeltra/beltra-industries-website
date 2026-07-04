@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { MediaParallax } from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import Scramble from "@/components/Scramble";
 
@@ -68,6 +70,25 @@ export default function AboutPage() {
           automation, and intelligent software platforms designed for
           real-world deployment across multiple industries.
         </p>
+      </section>
+
+      {/* The workshop */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
+        <Reveal className="reg-plate relative border border-fog">
+          <MediaParallax className="max-h-[440px]">
+            <Image
+              src="/images/workshop.png"
+              alt="Machined black steel plates in a precision rack"
+              width={1376}
+              height={768}
+              sizes="(min-width: 1280px) 1216px, 100vw"
+              className="max-h-[440px] w-full object-cover"
+            />
+          </MediaParallax>
+          <span className="tech-label absolute bottom-4 left-4 bg-black/60 px-3 py-2 text-white/80">
+            The House / Est. U.S.A.
+          </span>
+        </Reveal>
       </section>
 
       {/* Mission */}

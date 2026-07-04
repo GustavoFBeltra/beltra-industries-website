@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { MediaParallax } from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import Scramble from "@/components/Scramble";
 import { getPlatform, platforms } from "@/lib/platforms";
@@ -98,15 +99,17 @@ export default async function PlatformPage({
       {/* Concept visual for platforms without product screenshots */}
       {platform.slug !== "tab" && (
         <section className="mx-auto max-w-7xl px-5 pt-16 sm:px-8">
-          <Reveal className="reg-plate relative overflow-hidden border border-fog">
-            <Image
-              src={`/images/platforms/visuals/${platform.slug}.png`}
-              alt={`${platform.name} — concept visual`}
-              width={1376}
-              height={768}
-              sizes="(min-width: 1280px) 1216px, 100vw"
-              className="max-h-[420px] w-full object-cover"
-            />
+          <Reveal className="reg-plate relative border border-fog">
+            <MediaParallax className="max-h-[420px]">
+              <Image
+                src={`/images/platforms/visuals/${platform.slug}.png`}
+                alt={`${platform.name} — concept visual`}
+                width={1376}
+                height={768}
+                sizes="(min-width: 1280px) 1216px, 100vw"
+                className="max-h-[420px] w-full object-cover"
+              />
+            </MediaParallax>
             <span className="tech-label absolute bottom-4 left-4 bg-black/60 px-3 py-2 text-white/80">
               {platform.part} / {platform.category}
             </span>
