@@ -292,6 +292,61 @@ export const platforms: Platform[] = [
       body: "Growth-ly is currently in development. Sign up to get early access when we launch.",
     },
   },
+  {
+    slug: "kinly",
+    part: "BI-06",
+    name: "Kinly",
+    shortName: "Kinly",
+    category: "Accessibility & Assistance",
+    status: "Active Development",
+    tagline: "Technology, on your terms",
+    summary: "AI companion for understanding and operating your phone",
+    description:
+      "An AI-powered technology companion for Android that helps people understand and operate their phones through natural conversation. Instead of learning menus, icons, and ever-changing app layouts, you say what you're trying to do — Kinly explains the screen, highlights the right control, guides you step by step, or safely performs the steps with you. Built on the belief that technology should adapt to the person, not the other way around.",
+    cta: "Join Waitlist",
+    features: [
+      {
+        title: "Show Me",
+        description:
+          "Explains what's on screen and highlights the right control. In this mode Kinly never taps or types — you stay in charge of every action.",
+      },
+      {
+        title: "Help Me",
+        description:
+          "Guides you one step at a time in plain language while you perform each action yourself, at your own pace.",
+      },
+      {
+        title: "Do It With Me",
+        description:
+          "Performs simple, low-risk steps for you and always asks before anything consequential — sending, buying, or deleting.",
+      },
+      {
+        title: "On-Device Safety Engine",
+        description:
+          "Every AI-proposed action passes through a deterministic safety engine on the phone. Consequential actions require explicit confirmation, and the result of every step is verified rather than assumed.",
+      },
+      {
+        title: "Private by Design",
+        description:
+          "Passwords, codes, and card numbers are masked on-device and never leave the phone. No stored screenshots, and no screen access outside an active session.",
+      },
+      {
+        title: "Always in Control",
+        description:
+          "A Stop button is always available. Large readable text, big touch targets, and full light and dark themes adapt the interface to you.",
+      },
+    ],
+    industries: [
+      { name: "Individuals", note: "Anyone who finds technology frustrating" },
+      { name: "Accessibility", note: "Visual, motor, and cognitive support" },
+      { name: "Older Adults", note: "Independence with modern devices" },
+      { name: "Families", note: "Helping the people you love stay connected" },
+    ],
+    closing: {
+      headline: "Technology, on your terms",
+      body: "Kinly is in development — the production foundation and safety architecture are complete, and guided screen assistance is the current milestone. Join the waitlist to be first in line.",
+    },
+  },
 ];
 
 export function getPlatform(slug: string): Platform | undefined {

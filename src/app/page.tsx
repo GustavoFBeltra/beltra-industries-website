@@ -125,7 +125,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid grid-cols-2 gap-px border border-fog bg-fog lg:grid-cols-4">
             {[
-              { end: 5, pad: 2, suffix: "", label: "Platforms in the catalog" },
+              { end: 6, pad: 2, suffix: "", label: "Platforms in the catalog" },
               { end: 6, pad: 2, suffix: "", label: "Sectors served" },
               { end: 100, pad: 0, suffix: "+", label: "Languages supported" },
               { end: 1, pad: 0, prefix: "<", suffix: "s", label: "Transaction processing" },
@@ -185,7 +185,7 @@ export default function Home() {
                 <Scramble text="The Catalog" duration={700} />
               </p>
               <h2 className="display mt-4 max-w-[11ch] text-4xl sm:text-5xl">
-                <Scramble text="Five platforms. One standard." delay={100} />
+                <Scramble text="Six platforms. One standard." delay={100} />
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-graphite">

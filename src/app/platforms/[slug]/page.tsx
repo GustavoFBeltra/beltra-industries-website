@@ -79,7 +79,7 @@ export default async function PlatformPage({
         >
           <Link
             href={
-              platform.status === "Active Development"
+              platform.cta === "Request Access"
                 ? "/contact?type=platform"
                 : "/contact?type=waitlist"
             }

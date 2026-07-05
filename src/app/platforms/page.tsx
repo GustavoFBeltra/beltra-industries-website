@@ -42,7 +42,11 @@ export default function PlatformsPage() {
             <Reveal
               key={p.slug}
               delay={i * 60}
-              className={`bg-paper ${i === platforms.length - 1 ? "md:col-span-2" : ""}`}
+              className={`bg-paper ${
+                platforms.length % 2 === 1 && i === platforms.length - 1
+                  ? "md:col-span-2"
+                  : ""
+              }`}
             >
               <Link
                 href={`/platforms/${p.slug}`}
